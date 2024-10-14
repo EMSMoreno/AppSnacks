@@ -14,7 +14,7 @@
 		<!-- For example: <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers> -->
 
 		<OutputType>Exe</OutputType>
-		<RootNamespace>AppSnacks</RootNamespace>
+		<RootNamespace>SnacksApp</RootNamespace>
 		<UseMaui>true</UseMaui>
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
@@ -43,7 +43,7 @@
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\lanche.svg" Color="#ede5cc" TintColor="67203c" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\Splash\lanche.svg" Color="#ede5cc" TintColor="#67203c" BaseSize="128,128" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -57,23 +57,24 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Resources\Images\cart.png" />
-	  <None Remove="Resources\Images\delete.png" />
-	  <None Remove="Resources\Images\edit.png" />
-	  <None Remove="Resources\Images\faq.png" />
-	  <None Remove="Resources\Images\foodicon.png" />
-	  <None Remove="Resources\Images\heart.png" />
-	  <None Remove="Resources\Images\heartfill.png" />
-	  <None Remove="Resources\Images\home.png" />
-	  <None Remove="Resources\Images\lancheicon1.png" />
-	  <None Remove="Resources\Images\lanchesico.png" />
-	  <None Remove="Resources\Images\lanchesimg.png" />
-	  <None Remove="Resources\Images\leftarrow.png" />
-	  <None Remove="Resources\Images\orders.png" />
-	  <None Remove="Resources\Images\profile.png" />
-	  <None Remove="Resources\Images\profilesettings.png" />
-	  <None Remove="Resources\Images\rightarrow.png" />
-	  <None Remove="Resources\Images\uploadphoto.png" />
+		<None Remove="Resources\Images\cart.png" />
+		<None Remove="Resources\Images\delete.png" />
+		<None Remove="Resources\Images\edit.png" />
+		<None Remove="Resources\Images\faq.png" />
+		<None Remove="Resources\Images\foodicon.png" />
+		<None Remove="Resources\Images\heart.png" />
+		<None Remove="Resources\Images\heartfill.png" />
+		<None Remove="Resources\Images\home.png" />
+		<None Remove="Resources\Images\lancheicon1.png" />
+		<None Remove="Resources\Images\lanchesico.png" />
+		<None Remove="Resources\Images\lanchesimg.png" />
+		<None Remove="Resources\Images\leftarrow.png" />
+		<None Remove="Resources\Images\orders.png" />
+		<None Remove="Resources\Images\profile.png" />
+		<None Remove="Resources\Images\profilesettings.png" />
+		<None Remove="Resources\Images\rightarrow.png" />
+		<None Remove="Resources\Images\uploadphoto.png" />
+		<None Remove="Resources\Splash\lanche.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -84,27 +85,40 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Pages\CartPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\HomePage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\LoginPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\PopularPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\ProductsPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\ProfilePage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\RegisterPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
+		<MauiSplashScreen Include="Resources\Splash\lanche.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="Pages\PopularPage.xaml.cs">
+			<DependentUpon>PopularPage.xaml</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<MauiXaml Update="Pages\CartPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\PopularPagePopular.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\HomePage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\LoginPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\ProductDetailsPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\ProductsListPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\ProfilePage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\RegisterPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 	</ItemGroup>
 
 </Project>
