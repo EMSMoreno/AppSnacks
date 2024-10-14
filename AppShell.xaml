@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Shell
-    x:Class="AppSnacks.AppShell"
+    x:Class="SnacksApp.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:AppSnacks"
+    xmlns:local="clr-namespace:SnacksApp"
+    xmlns:pages="clr-namespace:SnacksApp.Pages"
     Shell.FlyoutBehavior="Disabled"
-    Title="AppSnacks">
-
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+       Shell.NavBarHasShadow="True"
+       Shell.BackgroundColor="#2196F3"
+       Shell.ForegroundColor="White"
+       Shell.TitleColor="White"
+       Shell.UnselectedColor="White"
+       Shell.DisabledColor="#BFBFBF"
+       Shell.TabBarTitleColor="AntiqueWhite"
+       Shell.TabBarBackgroundColor="#2196F3"
+       Shell.TabBarForegroundColor="White">
 
 </Shell>
