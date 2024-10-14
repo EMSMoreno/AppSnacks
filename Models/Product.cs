@@ -18,6 +18,6 @@ namespace AppSnacks.Models
 
         public string? UrlImage { get; set; }
 
-        public string? ImagePath => AppConfig.BaseUrl + UrlImage;
+        //public string? ImagePath => AppConfig.BaseUrl + UrlImage;
     }
 }
