@@ -58,8 +58,10 @@
 
 	<ItemGroup>
 		<None Remove="Resources\Images\cart.png" />
+		<None Remove="Resources\Images\confirmado.gif" />
 		<None Remove="Resources\Images\delete.png" />
 		<None Remove="Resources\Images\edit.png" />
+		<None Remove="Resources\Images\emptycart.png" />
 		<None Remove="Resources\Images\faq.png" />
 		<None Remove="Resources\Images\foodicon.png" />
 		<None Remove="Resources\Images\heart.png" />
@@ -69,11 +71,16 @@
 		<None Remove="Resources\Images\lanchesico.png" />
 		<None Remove="Resources\Images\lanchesimg.png" />
 		<None Remove="Resources\Images\leftarrow.png" />
+		<None Remove="Resources\Images\logout.png" />
 		<None Remove="Resources\Images\orders.png" />
+		<None Remove="Resources\Images\pedidos.png" />
+		<None Remove="Resources\Images\perfilconfig.png" />
+		<None Remove="Resources\Images\perguntas.png" />
 		<None Remove="Resources\Images\profile.png" />
 		<None Remove="Resources\Images\profilesettings.png" />
 		<None Remove="Resources\Images\rightarrow.png" />
 		<None Remove="Resources\Images\uploadphoto.png" />
+		<None Remove="Resources\Images\user1.png" />
 		<None Remove="Resources\Splash\lanche.svg" />
 	</ItemGroup>
 
@@ -96,6 +103,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<MauiXaml Update="Models\OrderDetailPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="Pages\AddressPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
@@ -109,6 +119,9 @@
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Pages\FavoritesPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\OrdersPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Pages\PopularPagePopular.xaml">
