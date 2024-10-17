@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AppSnacks.Pages;
 
 namespace AppSnacks.Models
 {
@@ -18,6 +14,6 @@ namespace AppSnacks.Models
 
         public string? UrlImage { get; set; }
 
-        //public string? ImagePath => AppConfig.BaseUrl + UrlImage;
+        public string? ImagePath => AppConfig.BaseUrl + UrlImage;
     }
 }
