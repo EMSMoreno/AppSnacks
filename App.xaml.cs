@@ -8,13 +8,15 @@ namespace AppSnacks
     {
         private readonly ApiService _apiService;
         private readonly IValidator _validator;
+        private readonly FavoriteService _favoriteService;
 
-        public App(ApiService apiService, IValidator validator)
+        public App(ApiService apiService, IValidator validator, FavoriteService favoriteService)
         {
             InitializeComponent();
 
             _apiService = apiService;
             _validator = validator;
+            _favoriteService = favoriteService;
 
             SetMainPage();
         }

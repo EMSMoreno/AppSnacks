@@ -23,6 +23,7 @@ namespace AppSnacks
             builder.Services.AddHttpClient();
             builder.Services.AddSingleton<ApiService>();
             builder.Services.AddSingleton<IValidator, Validator>();
+            builder.Services.AddSingleton<FavoriteService>();
             return builder.Build();
         }
     }

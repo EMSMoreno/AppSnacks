@@ -10,20 +10,25 @@ public partial class ProductDetailsPage : ContentPage
     private readonly IValidator _validator;
     private int _productId;
     private bool _loginPageDisplayed = false;
+    private readonly FavoriteService _favoriteService;
+    private string? _imageUrl;
 
-    public ProductDetailsPage(int productId, string productName, ApiService apiService, IValidator validator)
+
+    public ProductDetailsPage(int productId, string productName, ApiService apiService, IValidator validator, FavoriteService favoriteService)
     {
         InitializeComponent();
         _apiService = apiService;
         _validator = validator;
         _productId = productId;
         Title = productName ?? "Product Details";
+        _favoriteService = favoriteService;
     }
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
         await GetProductDetails(_productId);
+        UpdateFavoriteButton();
     }
 
     private async Task<Product?> GetProductDetails(int produtoId)
@@ -38,7 +43,7 @@ public partial class ProductDetailsPage : ContentPage
 
         if (productDetail == null)
         {
-            // Handle error, display message or log in
+            // Handle error, display message or login
             await DisplayAlert("Error", errorMessage ?? "Unable to retrieve product.", "OK");
             return null;
         }
@@ -51,6 +56,7 @@ public partial class ProductDetailsPage : ContentPage
             LblProductPrice.Text = productDetail.Price.ToString();
             LblProductDescription.Text = productDetail.Details;
             LblTotalPrice.Text = productDetail.Price.ToString();
+            _imageUrl = productDetail.ImagePath;
         }
         else
         {
@@ -64,12 +70,7 @@ public partial class ProductDetailsPage : ContentPage
     {
         _loginPageDisplayed = true;
 
-        await Navigation.PushAsync(new LoginPage(_apiService, _validator));
-    }
-
-    private void BtnPopularImg_Clicked(object sender, EventArgs e)
-    {
-
+        await Navigation.PushAsync(new LoginPage(_apiService, _validator, _favoriteService));
     }
 
     private void BtnRemove_Clicked(object sender, EventArgs e)
@@ -139,5 +140,45 @@ public partial class ProductDetailsPage : ContentPage
         {
             await DisplayAlert("Error", $"An error occurred: {ex.Message}", "OK");
         }
+    }
+
+    private async void BtnFavoriteImg_Clicked(object sender, EventArgs e)
+    {
+        try
+        {
+            var existsFavorite = await _favoriteService.ReadAsync(_productId);
+            if (existsFavorite is not null)
+            {
+                await _favoriteService.DeleteAsync(existsFavorite);
+            }
+            else
+            {
+                var favoriteProduct = new FavoriteProduct()
+                {
+                    ProductId = _productId,
+                    IsFavorite = true,
+                    Details = LblProductDescription.Text,
+                    Name = LblProductName.Text,
+                    Price = Convert.ToDecimal(LblProductPrice.Text),
+                    ImageUrl = _imageUrl
+                };
+                await _favoriteService.CreateAsync(favoriteProduct);
+            }
+            UpdateFavoriteButton();
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error", $"An error occurred: {ex.Message}", "OK");
+        }
+    }
+
+    private async void UpdateFavoriteButton()
+    {
+        var existeFavorito = await
+               _favoriteService.ReadAsync(_productId);
+        if (existeFavorito is not null)
+            BtnFavoriteImg.Source = "heartfill";
+        else
+            BtnFavoriteImg.Source = "heart";
     }
 }

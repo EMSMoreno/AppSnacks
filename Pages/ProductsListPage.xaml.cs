@@ -1,22 +1,23 @@
 using AppSnacks.Models;
-using AppSnacks.Pages;
 using AppSnacks.Services;
 using AppSnacks.Validators;
 
-namespace SnacksApp.Pages;
+namespace AppSnacks.Pages;
 
 public partial class ProductsListPage : ContentPage
 {
     private readonly ApiService _apiService;
     private readonly IValidator _validator;
+    private readonly FavoriteService _favoriteService;
     private int _categoryId;
     private bool _loginPageDisplayed = false;
 
-    public ProductsListPage(int categoryId, string categoryName, ApiService apiService, IValidator validator)
-	{
-		InitializeComponent();
+    public ProductsListPage(int categoryId, string categoryName, ApiService apiService, IValidator validator, FavoriteService favoriteService)
+    {
+        InitializeComponent();
         _apiService = apiService;
         _validator = validator;
+        _favoriteService = favoriteService;
         _categoryId = categoryId;
         Title = categoryName ?? "Products";
     }
@@ -60,17 +61,16 @@ public partial class ProductsListPage : ContentPage
     private async Task DisplayLoginPage()
     {
         _loginPageDisplayed = true;
-        await Navigation.PushAsync(new LoginPage(_apiService, _validator));
+        await Navigation.PushAsync(new LoginPage(_apiService, _validator, _favoriteService));
     }
 
     private void CvProducts_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        var currentSelection = e.CurrentSelection.FirstOrDefault() as Product;
-
-        if (currentSelection is null)
-            return;
-
-        Navigation.PushAsync(new ProductDetailsPage(currentSelection.Id, currentSelection.Name!, _apiService, _validator));
+        Navigation.PushAsync(new ProductDetailsPage(currentSelection.Id,
+                                                     currentSelection.Name!,
+                                                     _apiService,
+                                                     _validator,
+                                                     _favoriteService));
 
         ((CollectionView)sender).SelectedItem = null;
     }
