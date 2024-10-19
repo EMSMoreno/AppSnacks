@@ -5,6 +5,7 @@
              Title="Favorites Page">
 
     <VerticalStackLayout>
+
         <Label x:Name="LblWarning" 
                Text="No favorite items selected."
                FontSize="15"
@@ -13,16 +14,20 @@
                HorizontalOptions="Center"
                VerticalOptions="Center"
                IsVisible="False"/>
+
         <CollectionView x:Name="CvProducts"
                     SelectionMode="Single"
                     Margin="5"
                     SelectionChanged="CvProducts_SelectionChanged">
+
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical"
                              Span="2"
                              HorizontalItemSpacing="10"
                              VerticalItemSpacing="10" />
             </CollectionView.ItemsLayout>
+
+
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Border VerticalOptions="Start"
@@ -30,15 +35,18 @@
                         Padding="10">
                         <Grid RowSpacing="5"
                           RowDefinitions="Auto,Auto,Auto">
+
                             <Image Aspect="AspectFill"
                                    HeightRequest="130"
                                    Source="{Binding ImageUrl}" />
+
                             <Label Grid.Row="1"
                                FontAttributes="Bold"
                                LineBreakMode="WordWrap"
                                FontSize="12"    
                                MaxLines="2"
                                Text="{Binding Name}" />
+
                             <Label Grid.Row="2"
                                FontAttributes="Bold"
                                Text="{Binding Price,StringFormat='€ {0:F2}'}" />

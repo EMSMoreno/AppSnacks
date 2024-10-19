@@ -2,21 +2,13 @@
 using AppSnacks.Services;
 using AppSnacks.Validators;
 
-namespace AppSnacks
+namespace SnacksApp
 {
     public partial class AppShell : Shell
     {
         private readonly ApiService _apiService;
         private readonly IValidator _validator;
         private readonly FavoriteService _favoriteService;
-        private ApiService apiService;
-        private IValidator validator;
-
-        public AppShell(ApiService apiService, IValidator validator)
-        {
-            this.apiService = apiService;
-            this.validator = validator;
-        }
 
         public AppShell(ApiService apiService, IValidator validator, FavoriteService favoriteService)
         {
@@ -31,7 +23,7 @@ namespace AppSnacks
         {
             var homePage = new HomePage(_apiService, _validator, _favoriteService);
             var cartPage = new CartPage(_apiService, _validator, _favoriteService);
-            var favoritesPage = new FavoritesPage(_apiService, _validator, _favoriteService);
+            var favoritesPage = new FavoritesPage(_apiService, _validator);
             var profilePage = new ProfilePage(_apiService, _validator, _favoriteService);
 
             Items.Add(new TabBar

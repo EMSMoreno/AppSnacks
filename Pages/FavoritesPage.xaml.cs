@@ -1,8 +1,9 @@
+using AppSnacks.Models;
+using AppSnacks.Pages;
 using AppSnacks.Services;
 using AppSnacks.Validators;
-using AppSnacks.Models;
 
-namespace AppSnacks.Pages;
+namespace SnacksApp.Pages;
 
 public partial class FavoritesPage : ContentPage
 {
@@ -10,10 +11,14 @@ public partial class FavoritesPage : ContentPage
     private readonly IValidator _validator;
     private readonly FavoriteService _favoriteService;
 
-    public FavoritesPage(ApiService apiService, IValidator validator, FavoriteService favoriteService)
+    public FavoritesPage(ApiService apiService, IValidator validator)
     {
-		InitializeComponent();
-	}
+        InitializeComponent();
+
+        _apiService = apiService;
+        _validator = validator;
+        _favoriteService = ServiceFactory.CreateFavoriteService();
+    }
 
     protected override async void OnAppearing()
     {
@@ -26,9 +31,10 @@ public partial class FavoritesPage : ContentPage
         try
         {
             var favoriteProducts = await _favoriteService.ReadAllAsync();
+
             if (favoriteProducts is null || favoriteProducts.Count == 0)
             {
-                CvProducts.ItemsSource = null; // clears the current list
+                CvProducts.ItemsSource = null; // clears currrent list
                 LblWarning.IsVisible = true; // shows warning
             }
             else
@@ -46,10 +52,13 @@ public partial class FavoritesPage : ContentPage
     private void CvProducts_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         var currentSelection = e.CurrentSelection.FirstOrDefault() as FavoriteProduct;
+
         if (currentSelection == null) return;
+
         Navigation.PushAsync(new ProductDetailsPage(currentSelection.ProductId,
                                                      currentSelection.Name!,
                                                      _apiService, _validator, _favoriteService));
+
         ((CollectionView)sender).SelectedItem = null;
     }
 }

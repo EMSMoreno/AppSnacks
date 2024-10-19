@@ -1,8 +1,9 @@
 using AppSnacks.Models;
+using AppSnacks.Pages;
 using AppSnacks.Services;
 using AppSnacks.Validators;
 
-namespace AppSnacks.Pages;
+namespace SnacksApp.Pages;
 
 public partial class ProductsListPage : ContentPage
 {
@@ -66,6 +67,11 @@ public partial class ProductsListPage : ContentPage
 
     private void CvProducts_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
+        var currentSelection = e.CurrentSelection.FirstOrDefault() as Product;
+
+        if (currentSelection is null)
+            return;
+
         Navigation.PushAsync(new ProductDetailsPage(currentSelection.Id,
                                                      currentSelection.Name!,
                                                      _apiService,

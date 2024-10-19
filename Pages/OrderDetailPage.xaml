@@ -4,6 +4,13 @@
              x:Class="AppSnacks.Pages.OrderDetailPage"
              Title="Order Details Page">
     <VerticalStackLayout>
+        <ActivityIndicator x:Name="loadIndicator"
+                   IsRunning="false"
+                   IsVisible="false"
+                   Color="Blue"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+        
         <CollectionView x:Name="CvOrderDetails" Margin="20">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical" ItemSpacing="5" />
